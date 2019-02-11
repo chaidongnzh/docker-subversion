@@ -57,7 +57,7 @@ ENV SVN_BASE /data/svn
 # Install Apache with PHP, LDAP and DAV SVN
 #
 RUN apk add --no-cache apache2 apache2-webdav apache2-ldap apache2-utils && \
-    apk add --no-cache php7-xml php7-apache2 && \
+    apk add --no-cache wget unzip php7 php7-apache2 php7-session php7-json php7-ldap php7-xml && \
     apk add --no-cache subversion mod_dav_svn && \
     apk add --no-cache sudo bash && \
     rm -f /etc/apache2/conf.d/info.conf \
@@ -65,7 +65,15 @@ RUN apk add --no-cache apache2 apache2-webdav apache2-ldap apache2-utils && \
           /etc/apache2/conf.d/dav.conf \
           /etc/apache2/conf.d/ssl.conf \
           /etc/apache2/conf.d/userdir.conf && \
-    mkdir /run/apache2
+    mkdir /run/apache2 &&\
+    wget --no-check-certificate https://github.com/mfreiholz/iF.SVNAdmin/archive/stable-1.6.2.zip &&\
+	unzip stable-1.6.2.zip -d /opt &&\
+	rm stable-1.6.2.zip &&\
+	mv /opt/iF.SVNAdmin-stable-1.6.2 /opt/svnadmin &&\
+	ln -s /opt/svnadmin /var/www/localhost/htdocs/svnadmin &&\
+    chmod -R 777 /opt/svnadmin/data
+    
+ADD svnadmin/classes/util/global.func.php /opt/svnadmin/classes/util/global.func.php
 
 # Install WebSVN
 #
