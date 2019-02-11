@@ -6,7 +6,8 @@ RUN apk add --no-cache wget unzip php7 php7-apache2 php7-session php7-json php7-
 	rm stable-1.6.2.zip &&\
 	mv /opt/iF.SVNAdmin-stable-1.6.2 /opt/svnadmin &&\
 	ln -s /opt/svnadmin /var/www/localhost/htdocs/svnadmin &&\
-    chmod -R 777 /opt/svnadmin/data
+    chmod -R 777 /opt/svnadmin/data &&\
+    chmod -R 777 /root/.subversion
     
 ADD svnadmin/classes/util/global.func.php /opt/svnadmin/classes/util/global.func.php
 
