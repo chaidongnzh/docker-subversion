@@ -1,6 +1,6 @@
 FROM iaean/subversion
 
-RUN apk add --no-cache wget unzip php7 php7-apache2 php7-session php7-json php7-ldap php7-xml && \
+RUN apk add --no-cache wget unzip php7 php7-apache2 php7-session php7-json php7-ldap php7-xml php7-pecl-redis && \
     wget --no-check-certificate https://github.com/mfreiholz/iF.SVNAdmin/archive/stable-1.6.2.zip &&\
 	unzip stable-1.6.2.zip -d /opt &&\
 	rm stable-1.6.2.zip &&\
